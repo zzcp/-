@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.gamecenter.mapper.CommentMapper">
+    <select id="getCommentList" resultType="com.zzz.gamecenter.entity.Comment">
+        select * from tb_comment_list where reply_id = -1 and game_id = #{gameId} limit #{offset},#{limit}
+    </select>
+
+    <select id="getCommentByUserId" resultType="com.zzz.gamecenter.entity.Comment">
+        SELECT tcl.*,tg.game_name,tg.img_url as gameImgUrl FROM tb_comment_list tcl,tb_games tg WHERE tcl.user_id = #{userId} AND tcl.game_id = tg.game_id
+    </select>
+
+    <insert id="addComment">
+        insert into tb_comment_list(game_id,user_id,content,name,score,time,img_url) values (#{gameId},#{userId},#{content},#{name},#{score},#{time},#{imgUrl})
+    </insert>
+
+    <select id="getAllComment" resultType="com.zzz.gamecenter.entity.Comment">
+        select * from tb_comment_list limit #{offset},#{limit}
+    </select>
+
+    <select id="getNewCommentId" resultType="int">
+        SELECT comment_id FROM tb_comment_list WHERE game_id = #{gameId} AND user_id = #{userId} ORDER BY TIME desc LIMIT 1
+    </select>
+
+    <select id="getCommentNum" resultType="int">
+        select count(*) from tb_comment_list
+    </select>
+    <select id="getAllCommentById" resultType="int">
+        select count(*) from tb_comment_list where reply_id = -1 and game_id = #{gameId}
+    </select>
+
+    <select id="findLikedComment" resultType="int">
+        select count(*) from tb_comment_liked where comment_id = #{commentId} and user_id = #{userId} and game_id = #{gameId}
+    </select>
+
+    <select id="findUnlikedComment" resultType="int">
+        select count(*) from tb_comment_unliked where comment_id = #{commentId} and user_id = #{userId} and game_id = #{gameId}
+    </select>
+
+    <insert id="likedComment">
+        insert into tb_comment_liked(comment_id,user_id,game_id) values(#{commentId},#{userId},#{gameId})
+    </insert>
+
+    <insert id="unlikedComment">
+        insert into tb_comment_unliked(comment_id,user_id,game_id) values(#{commentId},#{userId},#{gameId})
+    </insert>
+
+    <update id="updateLiked">
+        update tb_comment_list set liked = liked + #{num} where comment_id = #{commentId}
+    </update>
+
+    <update id="updateUnliked">
+        update tb_comment_list set unliked = unliked + #{num} where comment_id = #{commentId}
+    </update>
+
+    <delete id="cancelLiked">
+        delete from tb_comment_liked where comment_id = #{commentId} and user_id = #{userId} and game_id = #{gameId}
+    </delete>
+
+    <delete id="cancelUnliked">
+        delete from tb_comment_unliked where comment_id = #{commentId} and user_id = #{userId} and game_id = #{gameId}
+    </delete>
+
+    <delete id="delComment">
+        delete from tb_comment_list where comment_id = #{commentId} and user_id = #{userId} and game_id = #{gameId}
+    </delete>
+
+    <delete id="delLikedComment">
+        delete from tb_comment_liked where comment_id = #{commentId}
+    </delete>
+
+    <delete id="delUnlikedComment">
+        delete from tb_comment_unliked where comment_id = #{commentId}
+    </delete>
+
+    <insert id="replyComment">
+        insert into tb_comment_list(user_id,game_id,reply_id,content,img_url,time,name) values(#{userId},#{gameId},#{replyId},#{content},#{imgUrl},#{time},#{name})
+    </insert>
+
+    <select id="getReplyList" resultType="com.zzz.gamecenter.entity.Comment">
+        select * from tb_comment_list where reply_id = #{commentId} and game_id = #{gameId}
+    </select>
+</mapper>

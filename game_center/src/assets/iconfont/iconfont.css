@@ -1,0 +1,108 @@
+@font-face {
+    font-family:"iconfont";
+    /* Project id 4304656 */
+    src: url('//at.alicdn.com/t/c/font_4304656_qy2sd93f4o.woff2?t=1702361294412') format('woff2'), url('//at.alicdn.com/t/c/font_4304656_qy2sd93f4o.woff?t=1702361294412') format('woff'), url('//at.alicdn.com/t/c/font_4304656_qy2sd93f4o.ttf?t=1702361294412') format('truetype');
+}
+.iconfont {
+    font-family:"iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-xuanxiangshanchu:before {
+    content:"\e657";
+}
+.icon-xinxi:before {
+    content:"\e6aa";
+}
+.icon-cai:before {
+    content:"\e68f";
+}
+.icon-zan:before {
+    content:"\e6a1";
+}
+.icon-star:before {
+    content:"\e600";
+}
+.icon-close:before {
+    content:"\e9bb";
+}
+.icon-mono-left-full:before {
+    content:"\ea54";
+}
+.icon-default1:before {
+    content:"\e60f";
+}
+.icon-default2:before {
+    content:"\e611";
+}
+.icon-default3:before {
+    content:"\e610";
+}
+.icon-default4:before {
+    content:"\e614";
+}
+.icon-default5:before {
+    content:"\e615";
+}
+.icon-default6:before {
+    content:"\e617";
+}
+.icon-default7:before {
+    content:"\e618";
+}
+.icon-default8:before {
+    content:"\e61a";
+}
+.icon-default9:before {
+    content:"\e61b";
+}
+.icon-default10:before {
+    content:"\e61c";
+}
+.icon-default11:before {
+    content:"\e61d";
+}
+.icon-default12:before {
+    content:"\e61e";
+}
+.icon-default13:before {
+    content:"\e61f";
+}
+.icon-default14:before {
+    content:"\e620";
+}
+.icon-default15:before {
+    content:"\e621";
+}
+.icon-default16:before {
+    content:"\e622";
+}
+.icon-default17:before {
+    content:"\e623";
+}
+.icon-default18:before {
+    content:"\e624";
+}
+.icon-default19:before {
+    content:"\e625";
+}
+.icon-default20:before {
+    content:"\e626";
+}
+.icon-default0:before {
+    content:"\e60a";
+}
+.icon-window-down:before {
+    content:"\e9c0";
+}
+.icon-window-up:before {
+    content:"\e9c2";
+}
+.icon-mono-right-full:before {
+    content:"\ea55";
+}
+.icon-sousuo:before {
+    content:"\e608";
+}

@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/game_center?serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jdbc:
+    template:
+      query-timeout: 3
+  mvc:
+    static-path-pattern: /**
+  multipart:
+    max-file-size: 100MB        # file-size 总文件大小       MB 大写
+    max-request-size: 100MB     # request-size 单个文件大小  MB 大写
+    enabled: true
+
+server:
+  port: 8848
+
+#配置mybatis规则
+mybatis:
+#  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+#     开启驼峰命名
+    map-underscore-to-camel-case: true
+

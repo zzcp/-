@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.gamecenter.mapper.GameMapper">
+    <select id="getSearchList" resultType="com.zzz.gamecenter.entity.Game">
+        select * from tb_games
+        where game_name like concat('%',#{keyword},'%')
+        <if test="tag!=null">
+           and tags like concat('%',#{tag},'%')
+        </if>
+        limit #{offset},#{limit}
+    </select>
+
+    <select id="getSearchListByTag" resultType="com.zzz.gamecenter.entity.Game">
+        select * from tb_games where tags like concat('%',#{tag},'%') limit #{offset},#{limit}
+    </select>
+
+    <select id="getSearchListByUserName" resultType="com.zzz.gamecenter.entity.User">
+        select * from tb_user where name like concat('%',#{userName},'%') limit #{offset},#{limit}
+    </select>
+
+    <select id="getSearchListOfTotal" resultType="int">
+        select count(*) from tb_games
+        where game_name like concat('%',#{keyword},'%')
+        <if test="tag!=null">
+            and tags like concat('%',#{tag},'%')
+        </if>
+    </select>
+
+    <select id="getSearchListByTagOfTotal" resultType="int">
+        select count(*) from tb_games where tags like concat('%',#{tag},'%')
+    </select>
+
+    <select id="getSearchListByUserNameOfTotal" resultType="int">
+        select count(*) from tb_user where name like concat('%',#{userName},'%')
+    </select>
+
+    <select id="getGameList" resultType="com.zzz.gamecenter.entity.Game">
+        select * from tb_games limit #{offset},#{limit}
+    </select>
+
+    <select id="getNewGameOrder" resultType="com.zzz.gamecenter.entity.Game">
+        select * from tb_new_game
+    </select>
+
+    <select id="getGameById" resultType="com.zzz.gamecenter.entity.Game">
+        select * from tb_game_detail_list where game_id = #{gameId}
+    </select>
+
+    <select id="getGamesByDeveloper" resultType="com.zzz.gamecenter.entity.Game">
+        select * from tb_game_detail_list where developer like concat('%',#{developer},'%')
+    </select>
+
+    <select id="getRelatedList" resultType="com.zzz.gamecenter.entity.Game">
+        select * from tb_game_detail_list where tags like concat('%',#{tag},'%')
+    </select>
+
+    <select id="getRecommendList" resultType="com.zzz.gamecenter.entity.Game">
+        select * from tb_recommend
+    </select>
+
+
+    <select id="getAllGame" resultType="com.zzz.gamecenter.entity.Game">
+        select * from tb_game_detail_list limit #{offset},#{limit}
+    </select>
+
+    <select id="getGameNum" resultType="int">
+        select count(*) from tb_game_detail_list
+    </select>
+
+    <update id="updateGame">
+        update tb_game_detail_list
+        <set>
+            <if test="gameName!=null">
+                game_name = #{gameName},
+            </if>
+            <if test="sortId!=null">
+                sort_id = #{sortId},
+            </if>
+            <if test="gameLogo!=null">
+                game_logo = #{gameLogo},
+            </if>
+            <if test="gameBg!=null">
+                game_bg = #{gameBg},
+            </if>
+            <if test="imgUrl!=null">
+                img_url = #{imgUrl},
+            </if>
+            <if test="videoUrl!=null">
+                video_url = #{videoUrl},
+            </if>
+            <if test="score!=null">
+                score = #{score},
+            </if>
+            <if test="introduction!=null">
+                introduction = #{introduction},
+            </if>
+            <if test="screenshot!=null">
+                screenshot = #{screenshot},
+            </if>
+            <if test="tags!=null">
+                tags = #{tags},
+            </if>
+            <if test="bIntroduction!=null">
+                b_introduction = #{bIntroduction},
+            </if>
+            <if test="updateInfo!=null">
+                update_info = #{updateInfo},
+            </if>
+            <if test="gameInfo!=null">
+                game_info = #{gameInfo},
+            </if>
+            <if test="developer!=null">
+                developer = #{developer},
+            </if>
+            <if test="price!=null">
+                price = #{price}
+            </if>
+        </set>
+         where game_id = #{gameId}
+    </update>
+
+    <insert id="addGameDetail">
+        insert into tb_game_detail_list
+        (game_name,sort_id,img_url,price)
+        value
+        (#{gameName},#{sortId},#{imgUrl},#{price})
+    </insert>
+
+    <insert id="addGame">
+        insert into tb_games
+        (game_name,sort_id,img_url)
+        value
+        (#{gameName},#{sortId},#{imgUrl})
+    </insert>
+
+    <delete id="deleteGameInfo">
+        delete from tb_game_detail_list where game_id = #{gameId};
+    </delete>
+
+    <delete id="deleteGame">
+        delete from tb_games where game_id = #{gameId};
+    </delete>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.gamecenter.mapper.WishlistMapper">
+    <select id="getOrderById" resultType="com.zzz.gamecenter.entity.Wishlist">
+        SELECT tw.wishlist_id,tw.user_id,gdl.game_id,gdl.game_name,gdl.img_url,gdl.tags,gdl.price,tw.is_purchase FROM tb_game_detail_list AS gdl,tb_wishlist AS tw WHERE tw.user_id=#{userId} AND (gdl.game_id=tw.game_id) order by tw.is_purchase,tw.wishlist_id desc limit #{offset},#{limit}
+    </select>
+
+    <select id="getGameList" resultType="com.zzz.gamecenter.entity.Game">
+        SELECT tw.wishlist_id,tw.user_id,g.* FROM tb_games AS g,tb_wishlist AS tw WHERE tw.user_id=1 AND (g.game_id=tw.game_id)
+    </select>
+
+    <select id="getOrderByUserIdAndGameId" resultType="com.zzz.gamecenter.entity.Wishlist">
+        select * from tb_wishlist where user_id = #{userId} and game_id = #{gameId}
+    </select>
+
+    <insert id="addOrder">
+        insert into tb_wishlist(wishlist_id,user_id,game_id) values (#{wishlistId},#{userId},#{gameId})
+    </insert>
+
+    <update id="payOrder">
+        update tb_wishlist set is_purchase = 1 where user_id = #{userId} and game_id = #{gameId}
+    </update>
+
+    <select id="checkPay" resultType="int">
+        SELECT is_purchase FROM tb_wishlist WHERE user_id = #{userId} AND game_id = #{gameId}
+    </select>
+
+    <delete id="removeOrder">
+        delete from tb_wishlist where user_id = #{userId} and game_id = #{gameId}
+    </delete>
+
+
+    <select id="getAllWishlist" resultType="com.zzz.gamecenter.entity.Wishlist">
+        select * from tb_wishlist limit #{offset},#{limit}
+    </select>
+
+    <select id="getWishlistNum" resultType="int">
+        select count(*) from tb_wishlist
+    </select>
+</mapper>

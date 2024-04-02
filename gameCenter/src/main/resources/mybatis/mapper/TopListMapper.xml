@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.gamecenter.mapper.TopListMapper">
+    <select id="getTopListTitle" resultType="com.zzz.gamecenter.entity.TopListTitle">
+        select * from tb_toplist_title
+    </select>
+
+
+    <select id="getTopListByTLId" resultType="com.zzz.gamecenter.entity.Game">
+        select * from tb_toplist where tl_id = #{tlId}
+    </select>
+</mapper>
